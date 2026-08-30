@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无忧科技 | 极简科技</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; 
+            background-color: #fbfbfd; color: #1d1d1f; line-height: 1.5; 
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        .container { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+
+        /* 毛玻璃导航 */
+        nav { 
+            position: sticky; top: 0; z-index: 100; padding: 16px 0; 
+            background: rgba(251, 251, 253, 0.8); backdrop-filter: saturate(180%) blur(20px); 
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; color: #1d1d1f; }
+        .nav-links a { margin-left: 30px; font-size: 0.9rem; color: #6e6e73; }
+        .nav-links a:hover { color: #1d1d1f; }
+
+        /* 首屏 */
+        .hero { text-align: center; padding: 140px 0 80px; }
+        .hero h1 { 
+            font-size: 5rem; font-weight: 800; letter-spacing: -3px; line-height: 1.05; margin-bottom: 24px;
+            background: linear-gradient(to right, #1d1d1f, #6e6e73);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.75rem; color: #6e6e73; max-width: 600px; margin: 0 auto 40px; font-weight: 400; }
+        
+        /* 按钮 */
+        .btn-group button { 
+            padding: 14px 28px; border-radius: 980px; font-size: 1.1rem; font-weight: 500; 
+            cursor: pointer; border: none; margin: 0 8px; transition: all 0.3s ease;
+        }
+        .btn-primary { background: #0071e3; color: #fff; }
+        .btn-primary:hover { background: #0077ed; }
+        .btn-secondary { background: transparent; color: #0071e3; border: 2px solid #0071e3 !important; }
+        .btn-secondary:hover { background: #0071e3; color: #fff; }
+
+        /* --- 新增：苹果风产品展示区 (左图右文 / 右图左文) --- */
+        .product-showcase { padding: 100px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .product-showcase.reverse { direction: rtl; } /* 让第二张图文字在左，图在右 */
+        .product-showcase.reverse > * { direction: ltr; } /* 修正文字方向 */
+        
+        .product-img { 
+            width: 100%; border-radius: 24px; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08); /* 高级阴影 */
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .product-img:hover { transform: scale(1.03); }
+        
+        .product-text h2 { font-size: 3rem; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 20px; line-height: 1.1;}
+        .product-text p { font-size: 1.25rem; color: #6e6e73; margin-bottom: 30px; line-height: 1.6;}
+        .link-arrow { color: #0071e3; font-size: 1.2rem; font-weight: 500; display: inline-flex; align-items: center; }
+        .link-arrow:hover { text-decoration: underline; }
+
+        /* 极简卡片 */
+        .grid-section { padding: 100px 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .card { 
+            background: #fff; padding: 80px 40px; border-radius: 24px; text-align: center;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+        }
+        .card:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .card h3 { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; letter-spacing: -1px;}
+        .card p { color: #6e6e73; font-size: 1.2rem; }
+
+        /* 滚动动画 */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; letter-spacing: -1.5px; }
+            .product-showcase, .product-showcase.reverse { grid-template-columns: 1fr; direction: ltr; }
+            .product-text h2 { font-size: 2rem; }
+            .grid-section { grid-template-columns: 1fr; padding: 60px 0; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container nav-inner">
+        <div class="logo">无忧科技</div>
+        <div class="nav-links">
+            <a href="#">核心产品</a>
+            <a href="#">解决方案</a>
+            <a href="#">开发者</a>
+            <a href="#">联系我们</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container reveal">
+        <h1>化繁为简。<br>无忧前行。</h1>
+        <p>以极致的优雅与强大的性能，重新定义你的数字生活体验。</p>
+        <div class="btn-group">
+            <button class="btn-primary">探索无忧生态</button>
+            <button class="btn-secondary">观看影片</button>
+        </div>
+    </div>
+</section>
+
+<!-- 产品展示 1：左图右文 -->
+<section class="container product-showcase reveal">
+    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1000&q=80" alt="云端算力" class="product-img">
+    <div class="product-text">
+        <h2>云端算力，<br>突破边界。</h2>
+        <p>依托自研的分布式架构，让每一次计算都如丝般顺滑。无论是海量数据处理还是复杂模型训练，都能轻松应对。</p>
+        <a href="#" class="link-arrow">了解更多 &gt;</a>
+    </div>
+</section>
+
+<!-- 产品展示 2：右图左文 -->
+<section class="container product-showcase reverse reveal">
+    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80" alt="隐私安全" class="product-img">
+    <div class="product-text">
+        <h2>隐私安全，<br>刻入基因。</h2>
+        <p>从底层硬件到云端服务，端到端加密技术确保您的数据绝对私密。无忧科技，让您安心无忧。</p>
+        <a href="#" class="link-arrow">了解我们的安全架构 &gt;</a>
+    </div>
+</section>
+
+<!-- 极简卡片 -->
+<section class="container grid-section">
+    <div class="card reveal">
+        <h3>无缝生态</h3>
+        <p>设备间的默契配合，让工作流自然流淌。</p>
+    </div>
+    <div class="card reveal">
+        <h3>未来设计</h3>
+        <p>每一处细节的雕琢，只为带来纯粹的视觉享受。</p>
+    </div>
+</section>
+
+<div style="height: 100px;"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.15 });
+        revealElements.forEach(el => observer.observe(el));
+    });
+</script>
+
+</body>
+</html>
